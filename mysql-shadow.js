@@ -157,7 +157,7 @@ MySQLShadowSyncTable = function(connectionName, tableName, options, callback) {
 			var selector = {};
 			selector[table.PRIMARY_KEY] = mysqlRow[table.PRIMARY_KEY];
 
-			collection.update(selector, mysqlRow, { upsert: true }, function(err) {
+			collection.findOne(selector, function(err, mongoRow) {
 				if(err) {
 					if(callback) {
 						callback(err);
@@ -165,6 +165,31 @@ MySQLShadowSyncTable = function(connectionName, tableName, options, callback) {
 					} else {
 						throw err;
 					}
+				}
+
+				if(!mongoRow) {
+					mysqlRow._id = Random.id();
+					collection.insert(mysqlRow, function(err, inserted) {
+						if(err) {
+							if(callback) {
+								callback(err);
+								return;
+							} else {
+								throw err;
+							}
+						}
+					});
+				} else {
+					collection.update(selector, mysqlRow, { upsert: false }, function(err) {
+						if(err) {
+							if(callback) {
+								callback(err);
+								return;
+							} else {
+								throw err;
+							}
+						}
+					});				
 				}
 			});
 		});
