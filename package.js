@@ -1,6 +1,6 @@
 Package.describe({
 	summary: "Clone MySQL database into Mongo and auto replicate collection changes back to MySQL",
-	version: "1.0.1",
+	version: "1.0.2",
 	git: "https://github.com/perak/mysql-shadow.git"
 });
 

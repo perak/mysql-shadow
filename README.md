@@ -43,7 +43,7 @@ Meteor.startup(function() {
 				return;
 			}
 
-			console.log("Mirror initialized. Creating collections...");
+			console.log("Shadow initialized. Creating collections...");
 
 			MySQLShadowSyncAll(databaseName, {}, function(e) {
 				if(e) {
