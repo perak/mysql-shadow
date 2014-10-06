@@ -1,0 +1,35 @@
+{
+  "dependencies": {
+    "mysql": {
+      "version": "http://registry.npmjs.org/mysql/-/mysql-2.4.3.tgz",
+      "dependencies": {
+        "bignumber.js": {
+          "version": "http://registry.npmjs.org/bignumber.js/-/bignumber.js-1.4.0.tgz"
+        },
+        "readable-stream": {
+          "version": "1.1.13",
+          "dependencies": {
+            "core-util-is": {
+              "version": "1.0.1"
+            },
+            "isarray": {
+              "version": "http://registry.npmjs.org/isarray/-/isarray-0.0.1.tgz"
+            },
+            "string_decoder": {
+              "version": "0.10.31"
+            },
+            "inherits": {
+              "version": "2.0.1"
+            }
+          }
+        },
+        "require-all": {
+          "version": "http://registry.npmjs.org/require-all/-/require-all-0.0.8.tgz"
+        }
+      }
+    },
+    "squel": {
+      "version": "http://registry.npmjs.org/squel/-/squel-3.8.1.tgz"
+    }
+  }
+}

@@ -89,9 +89,8 @@ Now, when you do `SomeCollection.insert(...)`, `SomeCollection.update(...)` or `
 TODO
 ====
 
-- test it
+- test it (!)
 
 - inserts, updates and deletes can affect other tables in MySQL database (via triggers). In that case affected records should be cloned back to mongo.
 
-- performance (!)
-
+- improve performance
