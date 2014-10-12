@@ -1,6 +1,6 @@
 Package.describe({
 	summary: "Clone MySQL database into Mongo and auto replicate collection changes back to MySQL",
-	version: "1.0.2",
+	version: "1.0.3",
 	git: "https://github.com/perak/mysql-shadow.git"
 });
 
@@ -8,8 +8,7 @@ Package.describe({
 if(!Package.onUse) Package.onUse = Package.on_use;
 
 Npm.depends({
-	mysql: "2.4.3",
-	squel: "3.8.1"
+	mysql: "2.4.3"
 });
 
 Package.onUse(function(api) {

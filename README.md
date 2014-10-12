@@ -20,16 +20,16 @@ Do something like this in your server startup code:
 ```
 Meteor.startup(function() {
 
-	var databaseName = "some_database"; // Your database name
+	var connectionName = "my_connection"; // Name your connection as you wish
 
-	CreateMySQLConnection(databaseName, {
-		host     : 'localhost', // MySQL host address or IP
-		user     : 'root', // Username
-		password : 'password', // Password
-		database : databaseName
+	CreateMySQLConnection(connectionName, {
+		host     : "localhost", // MySQL host address or IP
+		database : "database",   // MySQL database name
+		user     : "root",      // MySQL username
+		password : "password"  // MySQL password
 	});
 
-	OpenMySQLConnection(databaseName, function(e) {
+	OpenMySQLConnection(connectionName, function(e) {
 		if(e) {
 			console.log(e.reason);
 			return;
@@ -37,22 +37,22 @@ Meteor.startup(function() {
 
 		console.log("Connected. Initializing shadow...");
 
-		CreateMySQLShadow(databaseName, {}, function(e) {
+		CreateMySQLShadow(connectionName, {}, function(e) {
 			if(e) {
 				console.log(e.reason);
 				return;
 			}
 
-			console.log("Shadow initialized. Creating collections...");
+			console.log("Shadow initialized. Copying data to mongo...");
 
-			MySQLShadowSyncAll(databaseName, {}, function(e) {
+			MySQLShadowSyncAll(connectionName, {}, function(e) {
 				if(e) {
 					console.log(e.reason);
 					return;
 				}
 
 				// If you want changes to your collections to be automatically replicated back to MySQL do something like this:
-				// MySQLShadowCollection(SomeCollection, databaseName);
+				// MySQLShadowCollection(SomeCollection, connectionName);
 
 				console.log("Success.");
 			});
@@ -60,7 +60,8 @@ Meteor.startup(function() {
 	});
 
 ```
-**That's it:** now your Mongo database contains collections with data from all tables found in MySQL database.
+**That's it:** now your Mongo database contains collections with data from all tables found in MySQL database. For each MySQL table you have collection with the same name in your Mongo database.
+
 
 Declare collections as you normally do:
 
@@ -94,3 +95,12 @@ TODO
 - inserts, updates and deletes can affect other tables in MySQL database (via triggers). In that case affected records should be cloned back to mongo.
 
 - improve performance
+
+
+Version history
+===============
+
+1.0.3
+-----
+
+- Improved SQL statement creation (removed squel, and now it works with dates)
