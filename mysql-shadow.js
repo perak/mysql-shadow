@@ -3,7 +3,11 @@ var Fiber = Npm.require("fibers");
 
 var MySQLConnections = {};
 
+var db = null;
+
 CreateMySQLConnection = function(connectionName, options) {
+	db = MongoInternals.defaultRemoteCollectionDriver().mongo.db;
+
 	var connection = mysql.createConnection(options);
 	MySQLConnections[connectionName] = connection;
 	return connection;
@@ -148,7 +152,6 @@ MySQLShadowSyncTable = function(connectionName, tableName, options, callback) {
 			}
 		}
 
-		var db = MongoInternals.defaultRemoteCollectionDriver().mongo.db;
 		var collection = db.collection(table.TABLE_NAME);
 
 		// upsert complete table from mysql to mongo

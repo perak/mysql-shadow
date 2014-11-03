@@ -80,7 +80,7 @@ You can do this only after shadow is already created, so best place is to put it
 
 ```
 ...
-MySQLShadowCollection(SomeCollection, databaseName);
+MySQLShadowCollection(SomeCollection, connectionName);
 ...
 ```
 
@@ -99,6 +99,12 @@ TODO
 
 Version history
 ===============
+
+1.0.4
+-----
+
+- Fixed bug with call to MongoInternals.defaultRemoteCollectionDriver(). Thanks to <a href="https://github.com/xxronis" target="_blank">xxronis</a>.
+
 
 1.0.3
 -----

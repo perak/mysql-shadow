@@ -27,9 +27,6 @@
           "version": "http://registry.npmjs.org/require-all/-/require-all-0.0.8.tgz"
         }
       }
-    },
-    "squel": {
-      "version": "http://registry.npmjs.org/squel/-/squel-3.8.1.tgz"
     }
   }
 }
