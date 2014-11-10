@@ -197,6 +197,7 @@ MySQLShadowSyncTable = function(connectionName, tableName, options, callback) {
 		});
 
 		// remove documents from mongo that not exists in mysql
+/*
 		collection.find({}).each(function(e, doc) {
 			if(doc) {
 				var mysqlRow = _.find(rows, function(row) { return row[table.PRIMARY_KEY] == doc[table.PRIMARY_KEY]; });
@@ -220,7 +221,7 @@ MySQLShadowSyncTable = function(connectionName, tableName, options, callback) {
 				}
 			}
 		});
-
+*/
 		if(callback) {
 			callback();
 		}
