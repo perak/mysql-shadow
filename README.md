@@ -100,6 +100,18 @@ TODO
 Version history
 ===============
 
+1.0.7
+-----
+
+- Fixed bug with time part in dates (if date object's hour, minute or second was zero, time part was not written)
+
+
+1.0.6
+-----
+
+- If record exists in mongo but doesn't exists in mysql - it's not deleted anymore
+
+
 1.0.5
 -----
 

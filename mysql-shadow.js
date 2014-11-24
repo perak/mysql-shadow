@@ -261,7 +261,7 @@ MySQLShadowSyncAll = function(connectionName, options, callback) {
 function dateToMySQLDateLiteral(date) {
 	var res = date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate();
 
-	if(date.getHours() != 0 && date.getMinutes() != 0 && date.getSeconds() != 0) {
+	if(date.getHours() != 0 || date.getMinutes() != 0 || date.getSeconds() != 0) {
 		res = res + " " + date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds();
 	}
 	return res;
