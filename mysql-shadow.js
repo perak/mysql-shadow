@@ -312,30 +312,34 @@ MySQLShadowCollection = function(collection, connectionName, options, callback) 
 		var sql = "INSERT INTO " + table.TABLE_NAME + " (";
 		var i = 0;
 		for(var field in row) {
-			if(i > 0) {
-				sql = sql + ", ";
+			if(!options.skipFields || options.skipFields.indexOf(field) < 0) {
+				if(i > 0) {
+					sql = sql + ", ";
+				}
+
+				sql = sql + field;
+
+				i++;
 			}
-
-			sql = sql + field;
-
-			i++;
 		}
 		sql = sql + ") VALUES (";
 
 		i = 0;
 		for(var field in row) {
-			if(i > 0) {
-				sql = sql + ", ";
-			}
+			if(!options.skipFields || options.skipFields.indexOf(field) < 0) {
+				if(i > 0) {
+					sql = sql + ", ";
+				}
 
-			var value = doc[field];
-			if(_.isDate(value)) {
-				sql = sql + "\'" + dateToMySQLDateLiteral(value) + "\'";
-			} else {
-				sql = sql + connection.escape(value);
-			}
+				var value = doc[field];
+				if(_.isDate(value)) {
+					sql = sql + "\'" + dateToMySQLDateLiteral(value) + "\'";
+				} else {
+					sql = sql + connection.escape(value);
+				}
 
-			i++;
+				i++;
+			}
 		}
 		sql = sql + ");";
 
@@ -384,20 +388,22 @@ MySQLShadowCollection = function(collection, connectionName, options, callback) 
 		var sql = "UPDATE " + table.TABLE_NAME + " SET ";
 		i = 0;
 		for(var field in modifier.$set) {
-			if(i > 0) {
-				sql = sql + ", ";
+			if(!options.skipFields || options.skipFields.indexOf(field) < 0) {
+				if(i > 0) {
+					sql = sql + ", ";
+				}
+
+				sql = sql + field + "=";
+
+				var value = modifier.$set[field];
+				if(_.isDate(value)) {
+					sql = sql + "\'" + dateToMySQLDateLiteral(value) + "\'";
+				} else {
+					sql = sql + connection.escape(value);
+				}
+
+				i++;
 			}
-
-			sql = sql + field + "=";
-
-			var value = modifier.$set[field];
-			if(_.isDate(value)) {
-				sql = sql + "\'" + dateToMySQLDateLiteral(value) + "\'";
-			} else {
-				sql = sql + connection.escape(value);
-			}
-
-			i++;
 		}
 		sql = sql + " WHERE " + table.PRIMARY_KEY + " = " + connection.escape(doc[table.PRIMARY_KEY]) + ";";
 

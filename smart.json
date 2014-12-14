@@ -3,7 +3,7 @@
 	"description": "Clone MySQL database into Mongo and auto replicate collection changes back to MySQL",
 	"homepage": "https://github.com/perak/mysql-shadow",
 	"author": "Petar Korponaic",
-	"version": "1.0.7",
+	"version": "1.0.8",
 	"git": "https://github.com/perak/mysql-shadow.git",
 	"packages": {}
 }
