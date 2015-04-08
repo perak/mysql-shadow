@@ -100,6 +100,12 @@ TODO
 Version history
 ===============
 
+1.0.10
+------
+
+- Fixed bug (crashing)
+
+
 1.0.9
 -----
 

@@ -143,7 +143,7 @@ MySQLShadowSyncTable = function(connectionName, tableName, options, callback) {
 	var tableData = [];
 	connection.query(tableDataQuery, function(e, rows) {
 		if(e) {
-			var err = new Meteor.Error(500, err.message);
+			var err = new Meteor.Error(500, e.message);
 			if(callback) {
 				callback(err);
 				return;
