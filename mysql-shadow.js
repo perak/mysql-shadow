@@ -84,7 +84,7 @@ CreateMySQLShadow = function(connectionName, options, callback) {
 
 	connection.query(showTablesQuery, function(e, rows) {
 		if(e) {
-			var err = new Meteor.Error(500, err.message);
+			var err = new Meteor.Error(500, e.message);
 			if(callback) {
 				callback(err);
 				return;
@@ -312,7 +312,7 @@ MySQLShadowCollection = function(collection, connectionName, options, callback) 
 		var sql = "INSERT INTO " + table.TABLE_NAME + " (";
 		var i = 0;
 		for(var field in row) {
-			if(!options.skipFields || options.skipFields.indexOf(field) < 0) {
+			if(!options || !options.skipFields || options.skipFields.indexOf(field) < 0) {
 				if(i > 0) {
 					sql = sql + ", ";
 				}
@@ -326,7 +326,7 @@ MySQLShadowCollection = function(collection, connectionName, options, callback) 
 
 		i = 0;
 		for(var field in row) {
-			if(!options.skipFields || options.skipFields.indexOf(field) < 0) {
+			if(!options || !options.skipFields || options.skipFields.indexOf(field) < 0) {
 				if(i > 0) {
 					sql = sql + ", ";
 				}

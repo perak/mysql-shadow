@@ -31,7 +31,7 @@ Meteor.startup(function() {
 
 	OpenMySQLConnection(connectionName, function(e) {
 		if(e) {
-			console.log(e.reason);
+			console.log("Error: " + e.code + " " + e.reason);
 			return;
 		}
 
@@ -39,7 +39,7 @@ Meteor.startup(function() {
 
 		CreateMySQLShadow(connectionName, {}, function(e) {
 			if(e) {
-				console.log(e.reason);
+				console.log("Error: " + e.code + " " + e.reason);
 				return;
 			}
 
@@ -47,12 +47,12 @@ Meteor.startup(function() {
 
 			MySQLShadowSyncAll(connectionName, {}, function(e) {
 				if(e) {
-					console.log(e.reason);
+					console.log("Error: " + e.code + " " + e.reason);
 					return;
 				}
 
 				// If you want changes to your collections to be automatically replicated back to MySQL do something like this:
-				// MySQLShadowCollection(SomeCollection, connectionName);
+				// MySQLShadowCollection(SomeCollection, connectionName, {});
 
 				console.log("Success.");
 			});
@@ -80,7 +80,7 @@ You can do this only after shadow is already created, so best place is to put it
 
 ```
 ...
-MySQLShadowCollection(SomeCollection, connectionName);
+MySQLShadowCollection(SomeCollection, connectionName, {});
 ...
 ```
 
@@ -99,6 +99,18 @@ TODO
 
 Version history
 ===============
+
+1.0.9
+-----
+
+- Fixed bug (crashing)
+
+
+1.0.8
+-----
+
+- Fixed bug (crashing)
+
 
 1.0.7
 -----
